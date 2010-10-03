@@ -2,6 +2,7 @@ class TimeShiftsController < ApplicationController
   before_filter :find_time_shift, :only =>[:show, :destroy]
 
   def index
+    @normal = true
     @data = mechanized_session.get_index
     @hours = @data[:time_shifts].reverse
     @missing = @data[:missing]

@@ -2,26 +2,28 @@
 <html>
 <head>
   <title>Pivotal Tracker Hours</title>
-  <meta content='width = device-width' name='viewport' />
+  <meta content='width = device-width' name='viewport'/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <%= stylesheet_link_tag "iphone" %>
-  <%= javascript_include_tag "prototype", "rails" %>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+  <%= stylesheet_link_tag :all, :cache => true %>
+  <%= javascript_include_tag :all, :cache => true %>
   <script type="text/javascript">
-  function clickclear(thisfield, defaulttext) {
-    if (thisfield.value == defaulttext) {
-      thisfield.value = "";
+    function clickclear(thisfield, defaulttext) {
+      if (thisfield.value == defaulttext) {
+        thisfield.value = "";
+      }
     }
-  }
-  function clickrecall(thisfield, defaulttext) {
-    if (thisfield.value == "") {
-      thisfield.value = defaulttext;
+    function clickrecall(thisfield, defaulttext) {
+      if (thisfield.value == "") {
+        thisfield.value = defaulttext;
+      }
     }
-  }
   </script>
   <%= csrf_meta_tag %>
 </head>
-<body>
+<body <% if @normal %>id="normal"<% end %>>
 <%= yield %>
 
 </body>

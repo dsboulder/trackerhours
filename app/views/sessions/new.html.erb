@@ -5,9 +5,9 @@
         This website allows employees of <strong>Pivotal Labs</strong> to enter their hours using
         webkit-based smartphones. Your username and password are <em>not stored</em>. When you authenticate,
         a session is established with Tracker passing through your credentials, and Tracker's session data
-        is stored in a cookie (using a gem
+        is stored in a cookie (using
         <a href="http://github.com/dsboulder/mechanized_session">mechanized_session</a>,
-        and some rails glue <a href="http://github.com/dsboulder/acts_as_other_website">acts_as_other_website</a>).
+        and <a href="http://github.com/dsboulder/acts_as_other_website">acts_as_other_website</a>).
       </p>
     </li>
   </ul>
@@ -15,12 +15,14 @@
   <ul class="form">
     <li>
       <%= f.label :username %>
-      <%= f.text_field :username %>
+      <%= f.text_field :username, :autocapitalize => "off" %>
     </li>
     <li>
       <%= f.label :password %>
       <%= f.password_field :password %>
     </li>
-    <li><%= f.submit "Login" %></li>
+    <li>
+      <button type="submit">Login</button>
+    </li>
   </ul>
 <% end %>

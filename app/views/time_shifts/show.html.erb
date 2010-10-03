@@ -1,16 +1,22 @@
 <%= render :partial => "/shared/header", :locals => {:title => "Time Shift", :back => ["Back", root_path]} %>
-<ul>
+<ul class="field">
   <li>
-    <%= @hour.date.strftime("%a %m/%d/%y") %>
+    <h3>Date</h3>
+    <a><%= @hour.date.strftime("%a %m/%d/%y") %></a>
   </li>
   <li>
-    <%=h @hour.project_name %>
+    <h3>Project</h3>
+    <a><%= h @hour.project_name %></a>
   </li>
   <li>
-    <%= pluralize(@hour.hours_worked, "hour") %>
+    <h3>Time</h3>
+    <a><%= pluralize(@hour.hours_worked, "hour") %></a>
   </li>
   <li>
-    <%=h @hour.description %>
+    <h3>Description</h3>
+    <big>
+      <%= h @hour.description %>
+    </big>
   </li>
 </ul>
 
