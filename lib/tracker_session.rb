@@ -6,6 +6,7 @@ class TrackerSession < MechanizedSession
       post_login_page = page.form_with(:action =>"#{BASE_URL}/signin") do |form|
         form["credentials[username]"] = options[:username]
         form["credentials[password]"] = options[:password]
+        form.checkbox_with(:name => /remember/).check
         session.logger.debug "Submitting /signin form"
       end.click_button
       session.logger.debug "Ended up on page #{post_login_page.uri}"

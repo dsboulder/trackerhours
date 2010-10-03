@@ -1,7 +1,4 @@
-<div id="header">
-  <h1>Time Shift</h1>
-  <%= link_to "Back", root_path, :id => "backButton", :class => "nav" %>
-</div>
+<%= render :partial => "/shared/header", :locals => {:title => "Time Shift", :back => ["Back", root_path]} %>
 <ul>
   <li>
     <%= @hour.date.strftime("%a %m/%d/%y") %>
