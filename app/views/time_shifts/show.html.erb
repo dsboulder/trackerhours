@@ -1,0 +1,22 @@
+<div id="header">
+  <h1>Time Shift</h1>
+  <%= link_to "Back", root_path, :id => "backButton", :class => "nav" %>
+</div>
+<ul>
+  <li>
+    <%= @hour.date.strftime("%a %m/%d/%y") %>
+  </li>
+  <li>
+    <%=h @hour.project_name %>
+  </li>
+  <li>
+    <%= pluralize(@hour.hours_worked, "hour") %>
+  </li>
+  <li>
+    <%=h @hour.description %>
+  </li>
+</ul>
+
+<ul>
+  <li class="arrow"><%= link_to "Delete Entry", time_shift_path(@hour), :method =>:delete, :confirm => "Are you sure?" %></li>
+</ul>

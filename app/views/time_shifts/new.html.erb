@@ -1,0 +1,46 @@
+<%= render :partial => "/shared/header", :locals => {:title => "New Shift", :back => ["Back", root_path]} %>
+<% form_for @time_shift, :html => {:id => "time_shift_form", :name => "time_shift_form"} do |f| %>
+  <ul class="form">
+    <% dates = @dates.collect{|group_name, ary| [group_name, ary.collect{|a|
+      hrs = @hours.select{|hr| hr.date == a}.sum(&:hours_worked)
+      params[:all] || hrs < 8.0 ? [a.strftime('%a %m/%d') + " #{hrs.zero? ? "no hrs" : "#{hrs} hrs"}  (#{pluralize(Date.today - a, 'day')} ago)", a] : nil
+    }.compact]} %>
+    <% dates.each do |group_name, ary| %>
+      <li>
+        <div style="font-size: 12px;"><%= group_name %></div>
+        <% if ary.present? %>
+          <% ary.each do |name, value| %>
+            <div style='color: darkred'><%= f.radio_button :date, value, {:id => "date_#{value}"} %> <%= f.label :date, name, :for => "date_#{value}" %></div>
+          <% end %>
+        <% else %>
+          <div style='color: darkgreen'>There are no missing days</div>
+        <% end %>
+      </li>
+    <% end %>
+    <%#= select_tag "time_shift[date]", grouped_options_for_select(dates, f.object.date)  %>
+    <li>
+      <%= f.select :project_id, @project_names %>
+    </li>
+    <li>
+      <span>Hours worked</span>
+      <%= f.text_field :hours_worked %>
+    </li>
+
+    <li>
+      <span>Description</span>
+      <%= f.text_field :description %>
+    </li>
+
+  </ul>
+  <%= link_to "Submit", "javascript: document.getElementById('time_shift_form').submit();", :class =>"white button" %>
+
+  <ul>
+    <li class="arrow">
+      <% if params[:all] %>
+      <%= link_to "Show only missing times", new_time_shift_path %>
+        <% else %>
+      <%= link_to "Show all possible times", new_time_shift_path(:all =>"1") %>
+        <% end %>
+    </li>
+  </ul>
+<% end %>

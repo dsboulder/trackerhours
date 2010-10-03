@@ -1,0 +1,32 @@
+<%= render :partial => "/shared/header", :locals => {:title => "Time Shifts", :action => ["New", new_time_shift_path]} %>
+
+<% if @missing.present? %>
+  <ul>
+    <% @missing.each do |missing| %>
+      <li class="arrow"><%=link_to "Missing #{missing}", new_time_shift_path(:time_shift => {:date => "#{missing.gsub(/[^0-9\/]/, '')}/#{Date.today.year}"}), :style => "color: red" %></li>
+    <% end %>
+  </ul>
+<% end %>
+<% this_pay_hours = @hours.select{|h| TimeShift.this_pay_period.include?(h.date)} %>
+<% last_pay_hours = @hours.select{|h| TimeShift.last_pay_period.include?(h.date)} %>
+<% if this_pay_hours.present? %>
+<h4>This pay period</h4>
+<ul>
+  <% this_pay_hours.each do |hour| %>
+    <%= render hour %>
+  <% end %>
+</ul>
+<% end %>
+
+<% if last_pay_hours.present? %>
+<h4>Last pay period</h4>
+<ul>
+  <% last_pay_hours.each do |hour| %>
+    <%= render hour %>
+  <% end %>
+</ul>
+<% end %>
+
+<ul>
+  <li class="arrow"><%= link_to "New Entry", new_time_shift_path %></li>
+  </ul>

@@ -1,0 +1,5 @@
+<li>
+  <small><%= time_shift.hours_worked %> hrs</small>
+  <%= link_to time_shift.project_name, time_shift_path(time_shift) %>
+  <%= link_to "#{time_shift.date.strftime("%a %m/%d/%y")} (#{time_shift.days_ago} days ago)", time_shift_path(time_shift) %>
+</li>
